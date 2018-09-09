@@ -1,8 +1,12 @@
 #Import the socket library
 import socket
+from threading import *
+
+#Create a string array that holds all of our chat logs
+chat = []
 
 #Create a socket object
-s = socket.socket()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket has been created")
 
 #Specify a port that we want to reserve
@@ -23,6 +27,10 @@ while True:
     #Establish a connection with the client
     c, addr = s.accept()
     print("Got connection from {}".format(addr))
+
+    string = c.recv(1024).decode()
+    print(string)
+    chat.append(string)
 
     #Send a message back to client
     c.send("Thank you for connecting".encode())
