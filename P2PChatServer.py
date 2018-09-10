@@ -30,7 +30,8 @@ while True:
 
     string = c.recv(1024).decode()
     print(string)
-    chat.append(string)
+    if string != '':
+        chat.append(string)
 
     #Send a message back to client
     c.send(pickle.dumps(chat))
