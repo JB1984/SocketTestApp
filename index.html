@@ -24,7 +24,9 @@ h1{
 <h1>Hello!</h1>
   <h2>The chat is: </h2>
   <p>
-{{chat}}
+     <div id="generate-here">
+     {{chat}}
+    </div>
   </p>
      <form method="POST">
          <input name="message">
@@ -34,7 +36,32 @@ h1{
 
 </div>
 
- {% endblock %}
- 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script type="text/javascript">
+
+    function create(htmlStr) {
+                  var frag = document.createDocumentFragment(),
+                      temp = document.createElement('div');
+                  temp.innerHTML = htmlStr;
+                  while (temp.firstChild) {
+                      frag.appendChild(temp.firstChild);
+                    }
+                      return frag;
+                    }
+
+        var chatArray = {{chat}}
+
+        for (i=0; i < chatArray.length; i++){
+            var fragment = create('<p>'+chatArray[i]+'</p>');
+            document.getElementById("generate-here").appendChild(fragment);
+        }
+
+</script>
+
 </body>
+
+  {% endblock %}
+
 </html>
